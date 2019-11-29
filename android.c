@@ -27,6 +27,7 @@ typedef int(*FINDVIEWBYID)(int id);
 typedef void(*ADDVIEW)(int layout,int view);
 typedef void(*SETVISIBILITY)(int view,int visibility);
 typedef void(*VIEW_SETTEXT)(int view,char*text);
+typedef char*(*VIEW_GETTEXT)(int view);
 typedef void(*CLOSEINPUT)();
 typedef void(*EDIT_GOTO)(int edit,int start);
 typedef void(*EDIT_SELECTION)(int edit,int start,int end);
@@ -64,6 +65,7 @@ FINDVIEWBYID findViewById;
 ADDVIEW addView;
 SETVISIBILITY setVisibility;
 VIEW_SETTEXT view_setText;
+VIEW_GETTEXT view_getText;
 CLOSEINPUT closeInput;
 EDIT_GOTO edit_goto;
 EDIT_SELECTION edit_selection;
@@ -147,6 +149,10 @@ int android_add(char*name,void*ptr)
  else if(!strcmp(name,"view_setText"))
  {
   view_setText = (VIEW_SETTEXT)ptr;
+ }
+  else if(!strcmp(name,"view_getText"))
+ {
+  view_getText = (VIEW_GETTEXT)ptr;
  }
  else if(!strcmp(name,"closeInput"))
  {
