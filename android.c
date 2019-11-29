@@ -1,13 +1,10 @@
 #include "android.h"
 
-/*
-手机C编译模式 系统头文件
-最后修改于：2019-11-25
-*/
-
 #ifdef __cplusplus
 #include <iostream>
-extern "C"{ //因为cpp文件默认定义了该宏),则采用C语言方式进行编译
+extern "C"{
+//因为cpp文件默认定义了该宏
+//则采用C语言方式进行编译
 #else
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,38 +12,38 @@ extern "C"{ //因为cpp文件默认定义了该宏),则采用C语言方式进行编译
 #endif
 
 
-typedef int (*CMD)(char *text);
-typedef int (*ROOTCMD)(char *text);
-typedef void (*TOAST)(char *text,int type);
-typedef char *(*GETDATAPATH)(char *datafile);
-typedef void *(*READFILEFROMASSETS)(char *filename, int *len);
-typedef void (*SETCONTEXTVIEW)(char* filename);
-typedef int (*CREATEVIEW)(char* name);
-typedef void (*CLEARVIEW)();
-typedef void (*SETORIENTATION)(int orien);
-typedef void (*SETVIEW)(int view,char* words);
+typedef int(*CMD)(char*text);
+typedef int(*ROOTCMD)(char*text);
+typedef void(*TOAST)(char*text,int type);
+typedef char*(*GETDATAPATH)(char*datafile);
+typedef void*(*READFILEFROMASSETS)(char*filename,int*len);
+typedef void(*SETCONTEXTVIEW)(char*filename);
+typedef int(*CREATEVIEW)(char*name);
+typedef void(*CLEARVIEW)();
+typedef void(*SETORIENTATION)(int orien);
+typedef void(*SETVIEW)(int view,char*words);
 
-typedef int (*FINDVIEWBYID)(int id);
-typedef void (*ADDVIEW)(int layout,int view);
-typedef void (*SETVISIBILITY)(int view,int visibility);
-typedef void (*VIEW_SETTEXT)(int view,char* text);
-typedef void (*CLOSEINPUT)();
-typedef void (*EDIT_GOTO)(int edit,int start);
-typedef void (*EDIT_SELECTION)(int edit,int start,int end);
-typedef void (*EDIT_INSERT)(int edit,int start,char* text);
-typedef void (*LOADURL)(int view,char *url);
-typedef void (*VIDEOSTART)(int id);
+typedef int(*FINDVIEWBYID)(int id);
+typedef void(*ADDVIEW)(int layout,int view);
+typedef void(*SETVISIBILITY)(int view,int visibility);
+typedef void(*VIEW_SETTEXT)(int view,char*text);
+typedef void(*CLOSEINPUT)();
+typedef void(*EDIT_GOTO)(int edit,int start);
+typedef void(*EDIT_SELECTION)(int edit,int start,int end);
+typedef void(*EDIT_INSERT)(int edit,int start,char*text);
+typedef void(*LOADURL)(int view,char*url);
+typedef void(*VIDEOSTART)(int id);
 
-typedef void (*VIDEOPAUSE)(int id);
-typedef void (*VIDEOSEEKTO)(int id,int time);
-typedef int (*SEEKBAR_GETPROGRESS)(int view);
-typedef void (*SEEKBAR_SETPROGRESS)(int view,int progress);
-typedef void (*SEEKBAR_SETMAX)(int view,int max);
-typedef int (*INPUTMODE)();
-typedef char (**CLIPGETTEXT)();
-typedef void (*LIST_REMOVE)(int view,int pos);
-typedef int (*LIST_GETSIZE)(int view);
-typedef void (*LIST_NOTIFYDATA)(int view);
+typedef void(*VIDEOPAUSE)(int id);
+typedef void(*VIDEOSEEKTO)(int id,int time);
+typedef int(*SEEKBAR_GETPROGRESS)(int view);
+typedef void(*SEEKBAR_SETPROGRESS)(int view,int progress);
+typedef void(*SEEKBAR_SETMAX)(int view,int max);
+typedef int(*INPUTMODE)();
+typedef char(**CLIPGETTEXT)();
+typedef void(*LIST_REMOVE)(int view,int pos);
+typedef int(*LIST_GETSIZE)(int view);
+typedef void(*LIST_NOTIFYDATA)(int view);
 
 
 
@@ -86,139 +83,139 @@ LIST_NOTIFYDATA list_notifyData;
 EX_CALL ex_call;
 SETVIEW setView;
 
-int android_add(char* name, void* ptr)
+int android_add(char*name,void*ptr)
 {
- if(!strcmp(name, "cmd"))
+ if(!strcmp(name,"cmd"))
  {
- cmd=(CMD)ptr;
+  cmd = (CMD)ptr;
  }
- else if(!strcmp(name, "rootCmd"))
+ else if(!strcmp(name,"rootCmd"))
  {
- rootCmd=(ROOTCMD)ptr;
+  rootCmd = (ROOTCMD)ptr;
  }
- else if(!strcmp(name, "toast"))
+ else if(!strcmp(name,"toast"))
  {
- toast=(TOAST)ptr;
+  toast = (TOAST)ptr;
  }
- else if(!strcmp(name, "getDataPath"))
+ else if(!strcmp(name,"getDataPath"))
  {
- getDataPath=(GETDATAPATH)ptr;
+  getDataPath = (GETDATAPATH)ptr;
  }
- else if(!strcmp(name, "readFileFromAssets"))
+ else if(!strcmp(name,"readFileFromAssets"))
  {
- readFileFromAssets=(READFILEFROMASSETS)ptr;
+  readFileFromAssets = (READFILEFROMASSETS)ptr;
  }
- else if(!strcmp(name, "setContextView"))
+ else if(!strcmp(name,"setContextView"))
  {
- setContextView=(SETCONTEXTVIEW)ptr;
+  setContextView = (SETCONTEXTVIEW)ptr;
  }
  else if(!strcmp(name,"setView"))
  {
-  setView=(SETVIEW)ptr;
+  setView = (SETVIEW)ptr;
  }
- else if(!strcmp(name, "createView"))
+ else if(!strcmp(name,"createView"))
  {
- createView=(CREATEVIEW)ptr;
+  createView = (CREATEVIEW)ptr;
  }
- else if(!strcmp(name, "clearView"))
+ else if(!strcmp(name,"clearView"))
  {
- clearView=(CLEARVIEW)ptr;
+  clearView = (CLEARVIEW)ptr;
  }
- else if(!strcmp(name, "setOrientation"))
+ else if(!strcmp(name,"setOrientation"))
  {
- setOrientation=(SETORIENTATION)ptr;
+  setOrientation = (SETORIENTATION)ptr;
  }
- else if(!strcmp(name, "setView"))
+ else if(!strcmp(name,"setView"))
  {
- setView=(SETVIEW)ptr;
+  setView = (SETVIEW)ptr;
  }
  else if(!strcmp(name,"setTitle")){
   setTitle = (SETTITLE)ptr;
  }
- else if(!strcmp(name, "findViewById"))
+ else if(!strcmp(name,"findViewById"))
  {
- findViewById=(FINDVIEWBYID)ptr;
+  findViewById = (FINDVIEWBYID)ptr;
  }
- else if(!strcmp(name, "addView"))
+ else if(!strcmp(name,"addView"))
  {
- addView=(ADDVIEW)ptr;
+  addView = (ADDVIEW)ptr;
  }
- else if(!strcmp(name, "setVisibility"))
+ else if(!strcmp(name,"setVisibility"))
  {
- setVisibility=(SETVISIBILITY)ptr;
+  setVisibility = (SETVISIBILITY)ptr;
  }
- else if(!strcmp(name, "view_setText"))
+ else if(!strcmp(name,"view_setText"))
  {
- view_setText=(VIEW_SETTEXT)ptr;
+  view_setText = (VIEW_SETTEXT)ptr;
  }
- else if(!strcmp(name, "closeInput"))
+ else if(!strcmp(name,"closeInput"))
  {
- closeInput=(CLOSEINPUT)ptr;
+  closeInput = (CLOSEINPUT)ptr;
  }
- else if(!strcmp(name, "edit_goto"))
+ else if(!strcmp(name,"edit_goto"))
  {
- edit_goto=(EDIT_GOTO)ptr;
+  edit_goto = (EDIT_GOTO)ptr;
  }
- else if(!strcmp(name, "edit_selection"))
+ else if(!strcmp(name,"edit_selection"))
  {
- edit_selection=(EDIT_SELECTION)ptr;
+  edit_selection = (EDIT_SELECTION)ptr;
  }
- else if(!strcmp(name, "edit_insert"))
+ else if(!strcmp(name,"edit_insert"))
  {
- edit_insert=(EDIT_INSERT)ptr;
+  edit_insert = (EDIT_INSERT)ptr;
  }
- else if(!strcmp(name, "loadUrl"))
+ else if(!strcmp(name,"loadUrl"))
  {
- loadUrl=(LOADURL)ptr;
+  loadUrl = (LOADURL)ptr;
  }
- else if(!strcmp(name, "videoStart"))
+ else if(!strcmp(name,"videoStart"))
  {
- videoStart=(VIDEOSTART)ptr;
+  videoStart = (VIDEOSTART)ptr;
  }
  
- if(!strcmp(name, "videoPause"))
+ if(!strcmp(name,"videoPause"))
  {
- videoPause=(VIDEOPAUSE)ptr;
+  videoPause = (VIDEOPAUSE)ptr;
  }
- else if(!strcmp(name, "videoSeekTo"))
+ else if(!strcmp(name,"videoSeekTo"))
  {
- videoSeekTo=(VIDEOSEEKTO)ptr;
+  videoSeekTo = (VIDEOSEEKTO)ptr;
  }
- else if(!strcmp(name, "seekbar_getProgress"))
+ else if(!strcmp(name,"seekbar_getProgress"))
  {
- seekbar_getProgress=(SEEKBAR_GETPROGRESS)ptr;
+  seekbar_getProgress = (SEEKBAR_GETPROGRESS)ptr;
  }
- else if(!strcmp(name, "seekbar_setProgress"))
+ else if(!strcmp(name,"seekbar_setProgress"))
  {
- seekbar_setProgress=(SEEKBAR_SETPROGRESS)ptr;
+  seekbar_setProgress = (SEEKBAR_SETPROGRESS)ptr;
  }
- else if(!strcmp(name, "seekbar_setMax"))
+ else if(!strcmp(name,"seekbar_setMax"))
  {
- seekbar_setMax=(SEEKBAR_SETMAX)ptr;
+  seekbar_setMax = (SEEKBAR_SETMAX)ptr;
  }
- else if(!strcmp(name, "inputMode"))
+ else if(!strcmp(name,"inputMode"))
  {
- inputMode=(INPUTMODE)ptr;
+  inputMode = (INPUTMODE)ptr;
  }
- else if(!strcmp(name, "clipGetText"))
+ else if(!strcmp(name,"clipGetText"))
  {
- clipGetText=(CLIPGETTEXT)ptr;
+  clipGetText = (CLIPGETTEXT)ptr;
  }
- else if(!strcmp(name, "list_remove"))
+ else if(!strcmp(name,"list_remove"))
  {
- list_remove=(LIST_REMOVE)ptr;
+  list_remove = (LIST_REMOVE)ptr;
  }
- else if(!strcmp(name, "list_getSize"))
+ else if(!strcmp(name,"list_getSize"))
  {
- list_getSize=(LIST_GETSIZE)ptr;
+  list_getSize = (LIST_GETSIZE)ptr;
  }
- else if(!strcmp(name, "list_notifyData"))
+ else if(!strcmp(name,"list_notifyData"))
  {
- list_notifyData=(LIST_NOTIFYDATA)ptr;
+  list_notifyData = (LIST_NOTIFYDATA)ptr;
  }
  else if(!strcmp(name,"ex_call"))
  {
-  ex_call=(EX_CALL)ptr;
+  ex_call = (EX_CALL)ptr;
  }
  else
  {
